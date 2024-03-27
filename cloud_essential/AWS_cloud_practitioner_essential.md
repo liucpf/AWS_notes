@@ -428,3 +428,121 @@ features
     - in-memory cache for DynamoDB
     - helps improve reponse time from single-digit milliseconds to microseconds
 
+## Security
+### summary
+- shared responsibility model
+- features of AWS identity and access management
+- methods of managing multiple accounts in AWS organizations
+- AWS compliance resources
+- AWS services for application security and encryption
+
+### shared responsibility model
+- customer
+    - responsible for the security in the cloud
+    - what
+        - platform, applications, identity and access management
+        - operating system, network and firewall configuration
+        - client-side encryption, server-side data encryption, network traffic protection
+    - layers
+        - operating system
+        - application
+        - data
+
+- AWS
+    - responsible for the security of the cloud
+    - what
+        - compute, storage, database, networking
+        - AWS global infrastructure
+        - regions, edge locations, availability zones
+    - layers
+        - physical
+        - network
+        - hypervisor
+        
+### user permission and access
+multi-factor authentication
+
+AWS identity and access management (IAM)
+    - root user
+    - user
+        - person or application that interacts with AWS services and resources
+        - consists of a name and credentials
+        - a new user by default has no permissions
+    - groups
+        - a collection of users
+        - when assign a policy to a group, all users are granted permissions
+    - policies
+        - a document that allows or denies permissions to AWS services and resources
+        - least previlige principle
+        - statement: effect, action, resource
+    - roles
+        - gain temporary access to permissions
+        - associated permissions
+        - allow or deny
+        - assumed for temporary amounts of time
+        - no username or password
+
+### AWS organization
+- centralized management
+- consolidated billing
+- hierarchical grouping of accounts
+- AWS service and API action access control
+- service control policy (SCP)
+
+group accounts into organization units
+
+### compliance
+
+AWS artifact
+- on-demand access to AWS security and compliance reports and select online agreements
+- AWS artifact agreements
+    - use of certain types of information throughout AWS services
+    - review, accept, manage agreements for an individual account or all accounts in AWS organization
+- AWS artifact reports
+    - provide compliance reports from third-party auditors
+    - the auditors have tested and verified that AWS is compliant with a variety of global, regional and industry-specific security standards and regulations
+
+Customer compliance center
+- contains resources to help learn more about AWS compliance
+
+### denial of service attacks
+
+Distributed denial of service (DDoS)
+- UDP flood
+    - security group
+- HTTP level attacks
+    - elastic load balancer
+- slowloris attack
+
+
+AWS shield with AWS WAF
+- AWS shield standard
+    - automatically protects all AWS customers at no cost
+    - detect malicious traffic by a variety of analysis techniques
+- AWS shield advanced
+    - a paid service that provides detailed attack diagnostics
+    - integrated with cloudfront, route 53, elastic load balancing
+
+### addition security service
+AWS key management service (AWS KMS)
+- crypographic keys for data
+
+AWS WAF
+- a web application firewall that let's you monitor network requests that come into your web applications
+secure sockets layer (SSL)
+- web access control list (ACL)
+
+Amazon inspector
+- network ocnfiguration reachability piece
+- amazon agent
+- security accessment service
+- automated security assessments
+
+Amazon GuardDuty
+- a service of intelligent threat detection for your AWS infrastructure and resources
+- VPC flow logs
+- DNS logs
+
+
+
+
