@@ -234,5 +234,197 @@ Containerized applications
 - Amazon cloudfront
     - content delivery network (CDN)
 
+## Module 5 storage and databases
 
+### summary
+- Amazon EC2 instance store and Amazon EBS
+- Amazon S3
+- Amazon EFS
+- Relational databases and Amazon RDS
+- nonrelational databases and DynamoDB
+- Amazon Redshift
+- AWS DMS
+- Additional database services and accelerators
+
+instance store volumes
+- temporary block level storage for EC2
+- physically attached to the host computer for an EC2 instance
+- has the same lifespan as the instance
+
+### Amazon elastic block store (EBS)
+- need to define configuration (volume size and type)
+- backups by creating EBS snapshots
+- incremental backups is only about chained volume
+- full backup includes data that has not changed since the most recent backup
+
+### Amazon simple storage service (S3)
+- store and retrieve an unlimited amount of data
+- store data as objects
+    - each object consists of data, metadata and a key
+- store objects in buckets
+- upload a maximum object size of 5TB
+- version objects
+- create multiple buckets
+- when a file in block storage is modified, only the pieces that are changed are updated
+- when a file in object storage is modified, the entire object is updated
+
+Amazon S3 storage classes
+- S3 standard
+    - designed for frequently accessed data
+    - stores data in a minimum of three availability zones
+    - has a higher cost than other storage classes intended for infrequently accessed data and archival storage
+- S3 standard-infrequent access (S3 standard-IA)
+    - ideal for infrequently accessed data, but requires high availability when needed
+    - same level of availability to S3 standard but has a lower storage price and higher retrieval price
+    - stores data in a minimum of three availability zones
+- S3 one zone-infrequent access (S3 One-Zone-IA)
+    - stores data in a single availability zone
+    - has a lower storage price than S3 standard-IA
+    - when to use
+        - you want to save costs on storage
+        - you can easily reproduce your data in the event of an availability zone failure
+- S3 intelligent-Tiering
+    - ideal for data with unknown or changing access patterns
+    - requires a small monly monitoring and automation fee per object
+    - if an object has not been accessed for 30 consecutive days, S3 automatically moves it to the infrequent access tier S3 standard-IA
+    - if you access an object in the infrequent access tier, S3 automatically moves it to the frequent access tier S3 standard
+- S3 Glacier instant retrieval
+    - works well for archived data that requires immediate access
+    - can retrieve objects within a few milliseconds
+- S3 Glacier flexible retrieval
+    - low cost storage designed for data archiving
+    - able to retrieve objects within a few minutes to hours
+- S3 Glacier deep archive
+    - lowest-cost object storage class ideal for archiving
+    - able to retrieve objects within 12 hours
+    - all objects from this storage class are replicated and stored cross at least three geographically dispersed availability zones
+- S3 outposts
+    - creates S3 buckets on S3 outposts
+    - makes it easier to retrieve, store, and access data on AWS outposts
+- two factors to consider when selecting a S3 storage class
+    - how often you plan to retrieve your data
+    - how available you need your data to be
+ 
+EBS vs S3
+- EBS
+    - sizes up to 16 TiB
+    - survive terminations of their EC2 instance
+    - solid state by default
+    - HDD options
+    - block storage
+- S3
+    - unlimited storage
+    - regionally distributed
+    - individual objects up to 5TBs
+    - write one/read many
+    - 99.99% durability
+    - object stroage
+
+### Amazon Elastic File System (EFS)
+EBS vs EFS
+- EBS
+    - volumes attach to EC2 instances
+    - availability Zone level resource
+    - need to be in the same AZ to attach EC2 instances
+    - Volumes do not automatically scale
+- EFS
+    - multiple instances reading and writing simultaneously
+    - linux file system
+    - regional resource
+    - automatically scales (on demand to petabytes)
+    - on-premises servers can access Amazon EFS using AWS direct connect
+
+file storage
+- multiple clients can access data that is stored in shared file folders
+- a storage server uses block storage with a local file system to organize files
+- ideal for use cases in which a large number of services and resources need to access the same data at the same time
+
+### Amazon relational database service (RDS)
+Amazon RDS
+- a service that enables you to run relational databases in the AWS cloud
+- features
+    - Automated patching
+    - backups
+    - redundancy
+    - failover
+    - disaster recovery
+    - encryption at rest (protecting data while it is stored)
+    - encryption in transit (protecting data while it is being sent and received)
+- database engines
+    - Amazon Aurora
+    - PostgreSQL
+    - MySQL
+    - MariaDB
+    - Oracle Database
+    - Microsoft SQL Server
+
+Amazon Aurora
+- enterprise-class relational database
+- compatible with MySQL and PostgreSQL
+- 1/10th the cost of commercial databases
+- Data replication
+- up to 15 read replicas
+- replicates six copies across three AZ
+- continuous backup to S3
+- point-in-time recovery
+
+### non-relational database
+Amazon DynamoDB
+- a key-value database service
+- features
+    - non-relational NoSQL database
+    - purpose built
+    - millisecond response time
+    - fully managed
+    - highly scalable
+
+RDS vs DynamoDB
+- RDS
+    - automatic high availability, recovery provided
+    - customer ownership of data
+    - customer ownership of schema
+    - customer control of network
+- DynamoDB
+    - key-value
+    - massive throughput capabilities
+    - PB size potential
+    - Granular API access
+
+### Amazon redshift
+features
+- datawarehouse as a service
+- bigdata BI analytics
+- collect data from many sources
+- helps understand relationships and trends across data
+
+### AWS Database Migration Service (DMS)
+features
+- relational or nonrelational or other types
+- source database remains fully operational during migration
+- downtime is minimized for applications that rely on that database
+- source and target databases do not have to be fo the same type
+    - homogenous vs heterogenous
+- development and test database migrations
+- database consolidation
+- continuous database replication
+
+### additional database services
+- Amazon DocumentDB
+    - a document database service that supports MongoDB workloads
+- Amazon Neptune
+    - a graph database service
+        - recommendation engines
+        - fraud detection
+        - knowledge graphs
+- Amazon managed blockchain
+    - create and manage blockchain networks with open-source frameworks
+- Amazon quantum ledger database (QLDB)
+    - a ledger database service
+    - a complete history of all the changes that have been made to your application data
+- Amazon ElastiCathe
+    - adds caching layers on top of databases to help improve the read times of common requests
+    - supports Redis and Memcached
+- Amazon DynamoDB Accelerator
+    - in-memory cache for DynamoDB
+    - helps improve reponse time from single-digit milliseconds to microseconds
 
